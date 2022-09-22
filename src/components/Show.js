@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../firebaseConfig/firebase";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
+const mySwal=withReactContent(Swal)
 
 const Show = () => {
   //1-configuramos los hooks
@@ -23,7 +27,26 @@ const Show = () => {
   };
 
   //5- funcion de confirmacion para sweet alert
-  const confirm=
+  const confirmDel=(id)=>{
+    mySwal.fire({
+      title: 'Estas Seguro de Querer Eliminar este medicamento?',
+      text: "Recuerda que este proceso no tiene vuelta atrás!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si,Borralo!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteMed(id)
+        Swal.fire(
+          'Borrado!',
+          'El Medicamento ha sido Borrado.',
+          'Exitoso'
+        )
+      }
+    })
+  }
 
 
 
@@ -70,11 +93,11 @@ const Show = () => {
                         to={`/edit/${med.id}`}
                         
                       >
-                        Button1
+                        Editar
                       </Link>
 
                       <button
-                        onClick={() => deleteMed(med.id)}
+                        onClick={() => confirmDel(med.id)}
                         className="btn btn-danger"
                       >
                         Eliminar
