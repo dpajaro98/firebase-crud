@@ -1,9 +1,8 @@
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { supabase } from "../DBConfig/supabase"
-import Create from "../components/Create"
-import Show from "../components/Show"
-import firebase from "../DBConfig/firebase"
+
+import { Link } from "react-router-dom";
 
 
 const Home = () => {
@@ -16,7 +15,7 @@ const Home = () => {
   return (
     <div>
       <h1>Hola desde Home</h1>
-      <Create/>
+      <Link to="/create" className="btn btn-secondary mt-2 mb-2">Crear Medicamento</Link>
       <button
       className="btn btn-danger"
       onClick={()=>{supabase.auth.signOut()}}

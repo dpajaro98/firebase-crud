@@ -1,5 +1,4 @@
 import React, { useState }from 'react'
-
 import {useNavigate} from "react-router-dom"
 import { supabase } from '../DBConfig/supabase';
 
@@ -59,7 +58,7 @@ export default function Create() {
                         type="text"
                         className='form-control'></input>
                         {/*  */}
-                        <label>Ingrese la Fecha de Vencimiento (AA-mm-dd) del Medicamento</label>
+                        <label>Ingrese la Fecha de Vencimiento del Medicamento</label>
                         <input 
                         name="fv"
                         onChange={(e)=>{setFV(e.target.value)}}
@@ -91,7 +90,3 @@ export default function Create() {
     </div>
   )
 }
-
-
-
-
