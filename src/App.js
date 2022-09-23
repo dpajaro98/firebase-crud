@@ -19,7 +19,7 @@ function App() {
         }}
         
     )
-  }, [])
+  }, [navigate])
 
   return (
     <div className="App">
