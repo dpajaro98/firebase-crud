@@ -31,7 +31,7 @@ const Edit = () => {
         console.log(med.data())
     }
     else{
-        console.log("este producto no existe")
+        console.log("este producto no existe") 
     }
   }
 
