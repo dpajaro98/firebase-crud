@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { db } from "../firebaseConfig/firebase";
+import { db } from "../DBConfig/firebase";
 import { getDoc, updateDoc, doc } from "firebase/firestore";
 
 const Edit = () => {
