@@ -1,32 +1,36 @@
 import React, { useState }from 'react'
-import { collection, addDoc} from "firebase/firestore";
-import { db } from "../firebaseConfig/firebase";
+
 import {useNavigate} from "react-router-dom"
+import { supabase } from '../DBConfig/supabase';
 
 
-const Create = () => {
+
+export default function Create() {
+
     const [nombre, setNombre] = useState('');
-    const [lote, setLote] = useState('')
-    const [fabricante, setFabricante] = useState('')
-    const [fv, setFV] = useState('')
-    const [stock, setStock] = useState(0)
+    const [lote, setLote] = useState('');
+    const [fabricante, setFabricante] = useState('');
+    const [fv, setFV] = useState('');
+    const [stock, setStock] = useState(0);
     const navigate =useNavigate()
-    const medCollection=collection(db,"medicamentos")
+    
 
-    const crear=async(e)=>{
+    const crear = async(e)=>{
         e.preventDefault()
-        await addDoc(medCollection,{
-            nombre:nombre,
-            lote:lote,
-            fabricante:fabricante,
-            fv:fv,
-            cantidad:stock        
+        try{
+            const result = await supabase.from("medicamentos").insert({
+                nombre:nombre,fabricante:fabricante,end_date:fv,lote:lote,stock:stock,
         })
+            console.log(result)
+            
+        }
+        catch(error){
+            console.log(error);
         navigate('/')
     }
+}
 
-
-
+    
   return (
     <div className='container'>
         <div className='row'>
@@ -36,35 +40,35 @@ const Create = () => {
                     <div className='mb-6'>
                         <label>Ingrese el Nombre del Medicamento</label>
                         <input 
-                        value={nombre}
+                        name="nombre"
                         onChange={(e)=>{setNombre(e.target.value)}}
                         type="text"
                         className='form-control'></input>
                         {/*  */}
                         <label>Ingrese el Lote del Medicamento</label>
                         <input 
-                        value={lote}
+                        name="lote"
                         onChange={(e)=>{setLote(e.target.value)}}
                         type="text"
                         className='form-control'></input>
                         {/*  */}
                         <label>Ingrese el Fabricante del Medicamento</label>
                         <input 
-                        value={fabricante}
+                        name="fabricante"
                         onChange={(e)=>{setFabricante(e.target.value)}}
                         type="text"
                         className='form-control'></input>
                         {/*  */}
                         <label>Ingrese la Fecha de Vencimiento (AA-mm-dd) del Medicamento</label>
                         <input 
-                        value={fv}
+                        name="fv"
                         onChange={(e)=>{setFV(e.target.value)}}
-                        type="text"
+                        type="date"
                         className='form-control'></input>
                         {/*  */}
                         <label>Ingrese la cantidad del Medicamento</label>
                         <input 
-                        value={stock}
+                        name="stock"
                         onChange={(e)=>{setStock(e.target.value)}}
                         type="number"
                         className='form-control'></input>
@@ -88,4 +92,6 @@ const Create = () => {
   )
 }
 
-export default Create
+
+
+
