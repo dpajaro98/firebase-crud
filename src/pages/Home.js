@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../DBConfig/supabase";
-import { useMeds } from "../context/MedContext";
+
 import { Link } from "react-router-dom";
 import ShowSupabase from "../components/ShowSupabase";
 
